@@ -17,9 +17,28 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	private $defaultData = array(
+		'title'			=> 'Solicitudes',
+		'layout' 		=> 'layout/lytDefault',
+		'contentView' 	=> 'vUndefined',
+		'stylecss'		=> '',
+	);
+
+  private function _renderView($data = array())
+  {
+    $data = array_merge($this->defaultData, $data);
+    $this->load->view($data['layout'], $data);
+    
+  }
+
+
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		  $data = array();
+		    $data['contentView'] = 'welcome_message';
+		     $this->_renderView($data);
+		//$this->load->view('welcome_message');
 	}
 }
 
