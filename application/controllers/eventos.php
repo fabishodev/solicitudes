@@ -35,7 +35,7 @@ class Eventos extends CI_Controller {
 	}
 
 	public function index($id_empleado = ''){
-			$this->session->set_userdata('id_empleado', $id_empleado );
+		$this->session->set_userdata('id_empleado', $id_empleado );
 		$data = array();
 		//die(print($id_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventos();
@@ -45,8 +45,7 @@ class Eventos extends CI_Controller {
 	}
 
 	public function lista()
-	{
-			
+	{			
 		$data = array();
 		//die(print($id_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventos();
@@ -55,6 +54,17 @@ class Eventos extends CI_Controller {
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
+
+	public function informacion($id_evento)
+	{			
+		$data = array();
+		//die(print($id_empleado."->"));
+		$data['evento'] = $this->even->getEvento($id_evento);
+		$data['id_empleado'] = $this->session->userdata('id_empleado');
+		$data['contentView'] = 'eventos/informacion';
+		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
 }
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file eventos.php */
+/* Location: ./application/controllers/eventos.php */
