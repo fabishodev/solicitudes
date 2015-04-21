@@ -21,7 +21,7 @@
 
 
   <?php if (isset($scripts)): foreach ($scripts as $js):?>
-  <script src="<?php echo base_url()." js/{$js}.js ";?>" type="text/javascript"></script>
+  <script src="<?php echo base_url()."js/{$js}.js";?>" type="text/javascript"></script>
   <?php endforeach; endif;?>
 
 </head>

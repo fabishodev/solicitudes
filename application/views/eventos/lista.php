@@ -65,7 +65,8 @@
 		                    </td>
 		                                 
 		                    <td>
-		                    	<button class="btn btn-primary btn-xs">Detalle</button>
+		                    	<button class="btn btn-info btn-xs">Detalle</button> |
+		                    	<button class="btn btn-warning btn-xs">Editar</button>
 		                    </td>	                    
 		                  </tr>
 

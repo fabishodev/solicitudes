@@ -45,19 +45,18 @@
 				<div class="col-lg-12">
 					<?php
 						if ($eventos !== FALSE) {
-							foreach ($eventos as $fila) { ?>
-								<div class="jumbotron">
-									<h1>   <?php echo  $fila->nombre_evento ?></h1>
-									<p><?php echo  $fila->des_evento ?></p>
-									<p><a  class="btn btn-primary btn-lg" href="#" role="button">Ir</a> <a id="btn-informacion" class="btn btn-info btn-lg" href="#" role="button">Información</a></p>
-								</div>
-							<?php
-							}
-						}
+					foreach ($eventos as $fila) { ?>
+					<div class="jumbotron">
+						<h1>   <?php echo  $fila->nombre_evento ?></h1>
+						<p><?php echo  $fila->des_evento ?></p>
+						<p><a id="btn-informacion" class="btn btn-primary btn-lg" href="#" role="button">Ir</a></p>
+					</div>
+					<?php
+					}
+					}
 					?>
 				</div>
 			</div>
 		</div>
-		<script>
-			aspaaug.eventos.ejemplo_click();
-		</script>
+		<script src="<?php echo base_url();?>js/eventos.js"></script>
+		<script>aspaaug.eventos.ejemplo_click();</script>

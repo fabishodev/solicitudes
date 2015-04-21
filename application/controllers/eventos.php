@@ -18,6 +18,7 @@ class Eventos extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('eventos_model','even');
+		$this->load->model('afiliado_model','afi');
 		
 	}
 
@@ -35,7 +36,7 @@ class Eventos extends CI_Controller {
 	}
 
 	public function index($id_empleado = ''){
-		$this->session->set_userdata('id_empleado', $id_empleado );
+		$this->session->set_userdata('id_empleado', '15272' );
 		$data = array();
 		//die(print($id_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventos();
@@ -58,13 +59,35 @@ class Eventos extends CI_Controller {
 	public function informacion($id_evento)
 	{			
 		$data = array();
-		//die(print($id_empleado."->"));
-		$data['evento'] = $this->even->getEvento($id_evento);
-		$data['id_empleado'] = $this->session->userdata('id_empleado');
+		$no_empleado = $this->session->userdata('id_empleado');		
+		$afiliado = $this->afi->getAfiliado($no_empleado);	
+		$this->session->set_userdata('id_afiliado', $afiliado->id_afiliado );
+		$this->session->set_userdata('id_evento', $id_evento );
+		$data['id_empleado'] = $no_empleado;	
+		$data['afiliado'] = $afiliado;
+		$data['evento'] = $this->even->getEventoAfiliado($id_evento,$afiliado->id_afiliado);		
 		$data['contentView'] = 'eventos/informacion';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
+	public function actualizar()
+	{			
+		$data = array();
+		$id_afiliado = $this->session->userdata('id_afiliado');		
+		$id_evento = $this->session->userdata('id_evento');		
+		$valor          = $this->input->post('entradas');
+		$datos       = array(    
+			'valor_entero'	=>  $valor,
+			'fecha_actualizado' => date('Y-m-d H:i:s')
+      	);
+      //die(print_r($datos));
+		if ($this->even->actualizarValor($datos, $id_afiliado, $id_evento)) {
+			redirect('/eventos/index');
+		}
+		
+		redirect('/eventos/informacion/'.$id_evento);
+	}
+
 }
 /* End of file eventos.php */
 /* Location: ./application/controllers/eventos.php */
