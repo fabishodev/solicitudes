@@ -8,6 +8,13 @@
   </div>
 </div>
 <div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<a href="<?php echo base_url();?>index.php/eventos/nuevo" class="btn btn-success btn-sm pull-right" href=""> <span class="glyphicon glyphicon-plus"></span>&nbsp;Agregar Evento</a>
+		</div>
+	</div>
+</div>
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
     	<table class="table" id="tbl-sol">

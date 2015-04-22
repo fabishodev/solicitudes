@@ -32,10 +32,23 @@ class eventos_model extends CI_Model {
 		$this->db->update('tram_eventos_afiliados', $serv);
 			if ($this->db->trans_status() === FALSE) {
 			$this->db->trans_rollback();
-			return false;
+			return FALSE;
 		} else {
 			$this->db->trans_commit();
 			return TRUE;
 		}
 	}
+	 function addNuevoEvento($serv = array()){
+    $this->db->trans_begin();
+    $this->db->insert('tram_eventos', $serv);
+
+      if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        return FALSE;
+      } else {
+        $this->db->trans_commit();
+
+        return TRUE;
+      }
+  }
 }

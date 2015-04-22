@@ -35,8 +35,8 @@
 			
 			<form action ="<?php echo base_url();?>index.php/eventos/actualizar" method="post" class="form-inline">
 				<div class="form-group">
-					<label for="entradas">Entradas</label>
-					<input type="text" class="form-control" id="entradas" name="entradas" value="<?php echo $evento->valor_entero ?>">
+					<label for="<?php echo $evento->nombre_variable ?>"><?php echo $evento->nombre_variable ?></label>
+					<input type="text" class="form-control" id="<?php echo $evento->nombre_variable ?>" name="<?php echo $evento->nombre_variable ?>" value="<?php echo $evento->valor_entero ?>">
 				</div>
 				<button type="submit" class="btn btn-info">Aplicar</button>
 			</form>

@@ -73,19 +73,57 @@ class Eventos extends CI_Controller {
 	public function actualizar()
 	{			
 		$data = array();
-		$id_afiliado = $this->session->userdata('id_afiliado');		
+		$id_afiliado = $this->session->userdata('id_afiliado');			
 		$id_evento = $this->session->userdata('id_evento');		
-		$valor          = $this->input->post('entradas');
+		$evento =  $this->even->getEventoAfiliado($id_evento,$id_afiliado);			
+		$valor          = $this->input->post($evento->nombre_variable);
 		$datos       = array(    
 			'valor_entero'	=>  $valor,
 			'fecha_actualizado' => date('Y-m-d H:i:s')
       	);
-      //die(print_r($datos));
+      	die(print($valor));
 		if ($this->even->actualizarValor($datos, $id_afiliado, $id_evento)) {
 			redirect('/eventos/index');
 		}
 		
 		redirect('/eventos/informacion/'.$id_evento);
+	}
+
+	public function nuevo()
+	{			
+		$data = array();
+		$no_empleado = $this->session->userdata('id_empleado');	
+		$data['id_empleado'] = $no_empleado;			
+		$data['contentView'] = 'eventos/nuevo';
+		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+
+	public function nuevoevento()
+	{
+		$nombre_evento          	= $this->input->post('nombre-evento');
+		$descripcion_evento      = $this->input->post('descripcion-evento');
+		$lugar_evento         	 = $this->input->post('lugar-evento');
+		$hora_inicio_evento         = $this->input->post('hora-inicio-evento');
+		$hora_fin_evento         = $this->input->post('hora-fin-evento');
+		$fecha_inicio_evento         = $this->input->post('fecha-inicio-evento');
+		$fecha_fin_evento         = $this->input->post('fecha-fin-evento');
+		$datos       = array(    
+			'nombre_evento'	=>  $nombre_evento,
+			'des_evento' => $descripcion_evento,
+			'estatus' => 1,
+			'lugar' => $lugar_evento,
+			'hora_inicio' => $hora_inicio_evento,
+			'hora_fin' => $hora_fin_evento,
+			'fecha_inicio' => $fecha_inicio_evento,
+			'fecha_fin' => $fecha_fin_evento,
+			'id_usuario' => 1,			
+			'fecha_creado' => date('Y-m-d H:i:s')
+      	);
+      //die(print_r($datos));
+		if ($this->even->addNuevoEvento($datos)) {
+			redirect('/eventos/index');
+		}
 	}
 
 }
