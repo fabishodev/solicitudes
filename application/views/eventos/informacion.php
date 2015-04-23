@@ -42,5 +42,6 @@
 			</form>
 		</div>
 	</div>
+	<p><?php echo anchor ('eventos/','Regresar a Eventos') ?></p>
 </div>
 <?php } ?>

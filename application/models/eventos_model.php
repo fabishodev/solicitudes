@@ -7,14 +7,33 @@ class eventos_model extends CI_Model {
 		}
 		
 	function getAllEventos() {
-		$where = "";
+		$where = "estatus = 1";
 		$this->db->select('*');
 		if($where != NULL){
-				$this->db->where($where,NULL,FALSE);
-			$this->db->order_by('fecha_solicitud', 'desc');
+			$this->db->where($where,NULL,FALSE);
+			$this->db->order_by('fecha_creado', 'desc');
 			}
 		$query = $this->db->get('tram_eventos');
 		return $query->result();
+	}
+	function getAllEventosLista() {
+		$where = "";
+		$this->db->select('*');
+		if($where != NULL){
+			$this->db->where($where,NULL,FALSE);
+			$this->db->order_by('fecha_creado', 'desc');
+			}
+		$query = $this->db->get('tram_eventos');
+		return $query->result();
+	}
+	function getEvento($id_evento) {
+		$where = "id = ".$id_evento."";
+		$this->db->select('*');
+		if($where != NULL){
+				$this->db->where($where,NULL,FALSE);
+			}
+		$query = $this->db->get('tram_eventos');
+		return $query->row();
 	}
 	function getEventoAfiliado($id_evento, $id_afiliado) {
 		$where = "id = ".$id_evento." AND id_afiliado =".$id_afiliado."";
@@ -26,9 +45,10 @@ class eventos_model extends CI_Model {
 		return $query->row();
 	}
 	function actualizarValor($serv = array(), $id_afiliado, $id_evento) {
+		//die(print_r($serv));
 		$this->db->trans_begin();
 		$this->db->where('id_afiliado', $id_afiliado);
-		$this->db->where('id', $id_evento);
+		$this->db->where('id_evento', $id_evento);
 		$this->db->update('tram_eventos_afiliados', $serv);
 			if ($this->db->trans_status() === FALSE) {
 			$this->db->trans_rollback();
@@ -51,4 +71,18 @@ class eventos_model extends CI_Model {
         return TRUE;
       }
   }
+
+  function editarEvento($serv = array(),$id_evento) {
+		//die(print_r($serv));
+		$this->db->trans_begin();	
+		$this->db->where('id', $id_evento);
+		$this->db->update('tram_eventos', $serv);
+			if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+			return FALSE;
+		} else {
+			$this->db->trans_commit();
+			return TRUE;
+		}
+	}
 }

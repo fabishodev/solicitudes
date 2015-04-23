@@ -71,9 +71,8 @@
 		                      <?php echo  $fila->fecha_fin ?>
 		                    </td>
 		                                 
-		                    <td>
-		                    	<button class="btn btn-info btn-xs">Detalle</button> |
-		                    	<button class="btn btn-warning btn-xs">Editar</button>
+		                    <td>		                    	
+		                    	<?php echo anchor('eventos/editar/'.$fila->id,'Editar',array('class' => 'btn btn-warning btn-xs')) ?>
 		                    </td>	                    
 		                  </tr>
 
