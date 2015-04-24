@@ -21,7 +21,6 @@ class Eventos extends CI_Controller {
 		$this->load->model('afiliado_model','afi');
 		
 	}
-
 	private $defaultData = array(
 		'title'			=> 'Solicitudes',
 		'layout' 		=> 'layout/lytDefault',
@@ -34,53 +33,50 @@ class Eventos extends CI_Controller {
 		$data = array_merge($this->defaultData, $data);
 		$this->load->view($data['layout'], $data);
 	}
-
-	public function index($id_empleado = ''){
-		if ($id_empleado == '') {
+	public function index($no_empleado = ''){
+		if ($no_empleado === '') {
 			redirect('/eventos/seleccionar');
 		}
-		$this->session->set_userdata('id_empleado', $id_empleado );
+		$this->session->set_userdata('no_empleado', $no_empleado );
 		$data = array();
-		//die(print($id_empleado."->"));
+		//die(print($no_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventos();
-		$data['id_empleado'] = $this->session->userdata('id_empleado');
+		$data['no_empleado'] = $no_empleado;
 		$data['contentView'] = 'eventos/index';
 		$this->_renderView($data);
 	}
-
 	public function seleccionar(){	
 		
 		$data = array();	
 		$error	= $this->session->userdata('error');
-		if (!$error) {
+		if ($error !== '') {
 			$data['error'] =  $error;
+			$this->session->set_userdata('error','');
 		}
 		else{
 			$data['error'] =  '';
 		}	
-		$this->session->set_userdata('id_empleado', '');
+		$this->session->set_userdata('no_empleado', '');
 		$data['eventos'] = $this->even->getAllEventos();		
 		$data['contentView'] = 'eventos/seleccionar';
 		//die(print_r($data));
 		$this->_renderView($data);
 	}
-
-
 	public function lista()
 	{			
 		$data = array();
-		//die(print($id_empleado."->"));
+		//die(print($no_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventosLista();
-		$data['id_empleado'] = $this->session->userdata('id_empleado');
+		$data['no_empleado'] = $this->session->userdata('no_empleado');
 		$data['contentView'] = 'eventos/lista';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-
 	public function informacion($id_evento = '')
 	{			
+		$this->session->set_userdata('error','');
 		$data = array();
-		$no_empleado = $this->session->userdata('id_empleado');	
+		$no_empleado = $this->session->userdata('no_empleado');	
 		if ($no_empleado === NULL || $no_empleado === '' ) {
 				$no_empleado = $this->input->post('id-empleado');
 		}	
@@ -95,7 +91,7 @@ class Eventos extends CI_Controller {
 		}
 		$this->session->set_userdata('id_afiliado', $afiliado->id_afiliado );
 		$this->session->set_userdata('id_evento', $id_evento );
-		$data['id_empleado'] = $no_empleado;	
+		$data['no_empleado'] = $no_empleado;	
 		$data['afiliado'] = $afiliado;
 		$data['evento'] = $this->even->getEventoAfiliado($id_evento,$afiliado->id_afiliado);		
 		$data['contentView'] = 'eventos/informacion';
@@ -108,7 +104,9 @@ class Eventos extends CI_Controller {
 		$id_afiliado = $this->session->userdata('id_afiliado');			
 		$id_evento = $this->session->userdata('id_evento');		
 		$evento =  $this->even->getEventoAfiliado($id_evento, $id_afiliado);			
-		$valor          = $this->input->post($evento->nombre_variable);
+		$nuevo         = $this->input->post($evento->nombre_variable);
+		$anterior = $evento->valor_entero;
+		$valor = $anterior - $nuevo;
 		$datos       = array(    
 			'valor_entero'	=>  $valor,
 			'fecha_actualizado' => date('Y-m-d H:i:s')
@@ -120,17 +118,15 @@ class Eventos extends CI_Controller {
 		
 		redirect('/eventos/informacion/'.$id_evento);
 	}
-
 	public function nuevo()
 	{			
 		$data = array();
-		$no_empleado = $this->session->userdata('id_empleado');	
-		$data['id_empleado'] = $no_empleado;			
+		$no_empleado = $this->session->userdata('no_empleado');	
+		$data['no_empleado'] = $no_empleado;			
 		$data['contentView'] = 'eventos/nuevo';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-
 	public function nuevoevento()
 	{
 		$nombre_evento          	= $this->input->post('nombre-evento');
@@ -157,18 +153,16 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/index');
 		}
 	}
-
 	public function editar($id_evento)
 	{			
 		$data = array();
-		$no_empleado = $this->session->userdata('id_empleado');			
-		$data['id_empleado'] = $no_empleado;		
+		$no_empleado = $this->session->userdata('no_empleado');			
+		$data['no_empleado'] = $no_empleado;		
 		$data['evento'] = $this->even->getEvento($id_evento);		
 		$data['contentView'] = 'eventos/editar';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-
 	public function editarevento($id_evento )
 	{
 		//$id_evento          	= $this->input->post('id-evento');
@@ -196,6 +190,19 @@ class Eventos extends CI_Controller {
 		if ($this->even->editarEvento($datos,$id_evento)) {
 			redirect('/eventos/lista');
 		}
+	}
+	public function verificaAfiliado($id_empleado)
+	{			
+		$afiliado = $this->afi->getAfiliado($id_empleado);	
+		if (!$afiliado) {
+			
+		$data = array();	
+		$data['contentView'] = 'eventos/noexiste';
+		die(print_r($data));
+		$this->_renderView($data);
+		}
+		
+		//$this->load->view('welcome_message');
 	}
 
 }

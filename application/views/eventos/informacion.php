@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6">
-			<p><?php echo $id_empleado ?></p>
+			<p><?php echo $no_empleado ?></p>
 			<p><?php echo $afiliado->nombre." ".$afiliado->primer_apellido." ".$afiliado->segundo_apellido ?></p>
 			<p><?php echo $afiliado->curp ?></p>
 			<p><?php echo $afiliado->correo_electronico ?></p>
@@ -32,7 +32,7 @@
 		<div class="col-lg-6">
 			<p><?php echo $evento->nombre_variable ?></p>
 			<p><?php echo $evento->descripcion ?></p>
-			
+			<p>Disponibles: <?php echo $evento->valor_entero ?> </p>
 			<form action ="<?php echo base_url();?>index.php/eventos/actualizar" method="post" class="form-inline">
 				<div class="form-group">
 					<label for="<?php echo $evento->nombre_variable ?>"><?php echo $evento->nombre_variable ?></label>

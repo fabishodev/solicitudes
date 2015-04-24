@@ -53,7 +53,7 @@
 				</div>
 				<div class=" form-group">
 					<button type="submit" class="btn btn-primary">Editar</button>
-					<p><?php echo anchor ('eventos/','Regresar a lista') ?></p>
+					<p><?php echo anchor ('eventos/lista','Regresar a lista') ?></p>
 				</div>
 			</form>
 		</div>
