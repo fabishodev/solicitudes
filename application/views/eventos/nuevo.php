@@ -41,6 +41,7 @@
 				</div>				
 				<div class=" form-group">
 					<button type="submit" class="btn btn-primary">Crear</button>
+						<p><?php echo anchor ('eventos/lista','Regresar a lista') ?></p>
 				</div>
 			</form>
 		</div>

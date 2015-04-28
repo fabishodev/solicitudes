@@ -16,32 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tram_eventos_afiliados`
+-- Table structure for table `tram_eventos_variables`
 --
 
-DROP TABLE IF EXISTS `tram_eventos_afiliados`;
+DROP TABLE IF EXISTS `tram_eventos_variables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tram_eventos_afiliados` (
+CREATE TABLE `tram_eventos_variables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_afiliado` int(11) DEFAULT NULL,
   `id_evento` int(11) DEFAULT NULL,
-  `id_variable` int(11) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
+  `nombre_variable` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
+  `estatus` int(11) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
   `fecha_actualizado` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tram_eventos_afiliados`
+-- Dumping data for table `tram_eventos_variables`
 --
 
-LOCK TABLES `tram_eventos_afiliados` WRITE;
-/*!40000 ALTER TABLE `tram_eventos_afiliados` DISABLE KEYS */;
-INSERT INTO `tram_eventos_afiliados` VALUES (1,5930,1,1,3,'2015-04-16 00:00:00','2015-04-24 19:08:05'),(2,5930,3,2,1,'2015-04-22 00:00:00','2015-04-24 18:28:57');
-/*!40000 ALTER TABLE `tram_eventos_afiliados` ENABLE KEYS */;
+LOCK TABLES `tram_eventos_variables` WRITE;
+/*!40000 ALTER TABLE `tram_eventos_variables` DISABLE KEYS */;
+INSERT INTO `tram_eventos_variables` VALUES (1,1,'Boleto','Boleto de entrada ASPAAREC',1,'2015-04-28 00:00:00',NULL),(2,3,'Botella','Botella de regalo del dia del Padre',1,'2015-04-28 00:00:00',NULL),(3,4,'Mochila','Mochila de regalo dia del maestro 2015.',1,'2015-04-28 21:15:41',NULL);
+/*!40000 ALTER TABLE `tram_eventos_variables` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

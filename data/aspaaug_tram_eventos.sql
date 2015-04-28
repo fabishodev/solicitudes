@@ -37,7 +37,7 @@ CREATE TABLE `tram_eventos` (
   `fecha_actualizado` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_evento_UNIQUE` (`nombre_evento`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `tram_eventos` (
 
 LOCK TABLES `tram_eventos` WRITE;
 /*!40000 ALTER TABLE `tram_eventos` DISABLE KEYS */;
-INSERT INTO `tram_eventos` VALUES (1,'Dia Del Niño 2015','Festival del dia del Niño',1,'ASPAREC','0000-00-00 09:00:00','0000-00-00 18:00:00','2015-05-30 00:00:00','2015-05-30 00:00:00',1,'2015-04-16 13:00:00',NULL);
+INSERT INTO `tram_eventos` VALUES (1,'Dia Del Niño 2015','Festival del dia del Niño',1,'ASPAREC','0000-00-00 09:00:00','0000-00-00 18:00:00','2015-05-30 00:00:00','2015-05-30 00:00:00',1,'2015-04-16 13:00:00','2015-04-28 16:57:25'),(3,'Dia del Padre 2015','Entrega de botellas Dia del Padre',1,'Auditorio de la Universidad de Guanajuato','0000-00-00 09:00:00','0000-00-00 18:00:00','2015-06-10 00:00:00','2015-06-10 00:00:00',1,'2015-04-22 17:12:38','2015-04-28 16:57:29'),(4,'Dia del Marestro 2015','Entrega de mochilas dia del maestro 2015',1,'Auditorio de la Universidad de Guanajuato','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-05-15 00:00:00','2015-05-15 00:00:00',1,'2015-04-28 20:55:47',NULL);
 /*!40000 ALTER TABLE `tram_eventos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-17 15:38:34
+-- Dump completed on 2015-04-28 15:36:01

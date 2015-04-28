@@ -204,6 +204,56 @@ class Eventos extends CI_Controller {
 		
 		//$this->load->view('welcome_message');
 	}
+	public function invitacionindividual(){	
+		
+		$data = array();	
+		$error	= $this->session->userdata('error');
+		if ($error !== '') {
+			$data['error'] =  $error;
+			$this->session->set_userdata('error','');
+		}
+		else{
+			$data['error'] =  '';
+		}	
+		$this->session->set_userdata('no_empleado', '');
+		$data['eventos'] = $this->even->getAllEventos();		
+		$data['contentView'] = 'eventos/invitacionindividual';
+		//die(print_r($data));
+		$this->_renderView($data);
+	}
+	public function variables()
+	{			
+		 $data = array();	
+		 $data['variables'] = $this->even->getAllVariables();
+		 $data['contentView'] = 'eventos/variables';
+		 $this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+	public function nuevavariable()
+	{			
+		$data = array();			
+		$data['eventos'] = $this->even->getAllEventos();	
+		$data['contentView'] = 'eventos/nueva';
+		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+	public function agregarnuevavariable()
+	{
+		$id_evento                = $this->input->post('id-evento');
+		$nombre_variable          	= $this->input->post('nombre-variable');
+		$descripcion_variable      = $this->input->post('descripcion-variable');		
+		$datos       = array(    
+			'id_evento'	=>  $id_evento,
+			'nombre_variable' => $nombre_variable,
+			'descripcion' => $descripcion_variable ,
+			'estatus' => 1,					
+			'fecha_creado' => date('Y-m-d H:i:s')
+      	);
+      //die(print_r($datos));
+		if ($this->even->addNuevaVariable($datos)) {
+			redirect('/eventos/variables');
+		}
+	}
 
 }
 /* End of file eventos.php */

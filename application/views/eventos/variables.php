@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
-        <h1>Lista <small>Eventos</small></h1>
+        <h1>Lista <small>Variables</small></h1>
       </div>
     </div>
   </div>
@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<a href="<?php echo base_url();?>index.php/eventos/nuevo" class="btn btn-success btn-sm pull-right" href=""> <span class="glyphicon glyphicon-plus"></span>&nbsp;Agregar Evento</a>
+			<a href="<?php echo base_url();?>index.php/eventos/nuevavariable" class="btn btn-success btn-sm pull-right" href=""> <span class="glyphicon glyphicon-plus"></span>&nbsp;Agregar Variable</a>
 		</div>
 	</div>
 </div>
@@ -21,21 +21,19 @@
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Evento</th>
+						<th>Nombre Evento</th>
 						<th>Descripcion</th>
-						<th>Lugar</th>
-						<th>Estatus</th>
-						<th>Hora Inicio</th>
-						<th>Hora Fin</th>
-						<th>Fecha Inicio</th>
-						<th>Fecha Fin</th>
+						<th>Variable</th>
+						<th>Descripcion</th>
+						<th>Estatus</th>				
+						<th>Fecha Creado</th>						
 						<th>Opciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-		              if ($eventos !== FALSE) {
-		                foreach ($eventos as $fila) {
+		              if ($variables !== FALSE) {
+		                foreach ($variables as $fila) {
 		                  ?>
 		                  <tr>
 		                  	 <td>
@@ -48,7 +46,10 @@
 		                      <?php echo  $fila->des_evento ?>
 		                    </td>
 		                     <td>
-		                      <?php echo  $fila->lugar ?>
+		                      <?php echo  $fila->nombre_variable ?>
+		                    </td>
+		                      <td>
+		                      <?php echo  $fila->descripcion ?>
 		                    </td>
 		                     <td>
 		                     <?php if ( $fila->estatus == 1){ ?>
@@ -57,22 +58,13 @@
 		                   	
 		                      <span class="label label-danger"> Finalizado</span>
 		                     <?php }?>
-		                    </td>
-		                   <td>
-		                      <?php echo  $fila->hora_inicio ?>
-		                    </td>
+		                    </td>		                 
 		                    <td>
-		                      <?php echo  $fila->hora_fin ?>
-		                    </td>
-		                    <td>
-		                      <?php echo date('Y-m-d', strtotime($fila->fecha_inicio));?>	
-		                    </td>
-		                     <td>
-		                      <?php echo date('Y-m-d', strtotime($fila->fecha_fin));?>
-		                    </td>
+		                      <?php echo date('Y-m-d', strtotime($fila->fecha_creado));?>	
+		                    </td>                 
 		                                 
 		                    <td>		                    	
-		                    	<?php echo anchor('eventos/editar/'.$fila->id,'Editar',array('class' => 'btn btn-warning btn-xs')) ?>
+		                    	<?php echo anchor('eventos/editarvariable/'.$fila->id,'Editar',array('class' => 'btn btn-warning btn-xs')) ?>
 		                    </td>	                    
 		                  </tr>
 
@@ -83,14 +75,12 @@
 				</tbody>
 				<tfoot>
 						<th>Id</th>
-						<th>Evento</th>
+						<th>Nombre Evento</th>
 						<th>Descripcion</th>
-						<th>Lugar</th>
-						<th>Estatus</th>
-						<th>Hora Inicio</th>
-						<th>Hora Fin</th>
-						<th>Fecha Inicio</th>
-						<th>Fecha Fin</th>
+						<th>Variable</th>
+						<th>Descripcion</th>
+						<th>Estatus</th>				
+						<th>Fecha Creado</th>						
 						<th>Opciones</th>
 				</tfoot>
 			</table>

@@ -47,10 +47,20 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><?php echo anchor('eventos/','Eventos') ?></li>
+                    <li><?php echo anchor('eventos/seleccionar','Seleccionar') ?></li>
                   <li><?php echo anchor('eventos/lista','Lista De Eventos') ?></li>
+                   <li><?php echo anchor('eventos/nuevo','Nuevo') ?></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Evento 5</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Invitación <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><?php echo anchor('eventos/invitacionindividual','Individual') ?></li>                 
                   <li class="divider"></li>
                   <li><a href="#">Evento 5</a></li>
                 </ul>
