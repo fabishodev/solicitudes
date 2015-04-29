@@ -25,5 +25,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="<?php echo base_url();?>js/eventos.js"></script>
 		<script>aspaaug.eventos.ejemplo_click();</script>
+		
+		

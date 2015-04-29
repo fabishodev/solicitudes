@@ -26,6 +26,7 @@ class Eventos extends CI_Controller {
 		'layout' 		=> 'layout/lytDefault',
 		'contentView' 	=> 'vUndefined',
 		'stylecss'		=> '',
+		'scripts'		=>  array('eventos'),
 	);
 
 	private function _renderView($data = array())
@@ -221,24 +222,21 @@ class Eventos extends CI_Controller {
 		//die(print_r($data));
 		$this->_renderView($data);
 	}
-	public function variables()
-	{
+	public function variables(){
 		 $data = array();
 		 $data['variables'] = $this->even->getAllVariables();
 		 $data['contentView'] = 'eventos/variables';
 		 $this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-	public function nuevavariable()
-	{
+	public function nuevavariable(){
 		$data = array();
 		$data['eventos'] = $this->even->getAllEventos();
 		$data['contentView'] = 'eventos/nueva';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-	public function agregarnuevavariable()
-	{
+	public function agregarnuevavariable(){
 		$id_evento                = $this->input->post('id-evento');
 		$nombre_variable          	= $this->input->post('nombre-variable');
 		$descripcion_variable      = $this->input->post('descripcion-variable');
