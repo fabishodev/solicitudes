@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -38,7 +40,7 @@
 				<div class="form-group">
 					<label for="fecha-fin-evento" class="control-label">Fecha fin del Evento:</label><br>
 					<input class="form-control" type="text" id="fecha-fin-evento" name="fecha-fin-evento" data-container="body" data-toggle="popover" data-placement="left" data-content="Fecha fin del evento." value="" required>
-				</div>				
+				</div>
 				<div class=" form-group">
 					<button type="submit" class="btn btn-primary">Crear</button>
 						<p><?php echo anchor ('eventos/lista','Regresar a lista') ?></p>
@@ -47,3 +49,10 @@
 		</div>
 	</div>
 </div>
+<script>
+$(function() {
+	$( "#fecha-inicio-evento" ).datepicker();
+	$( "#fecha-fin-evento" ).datepicker();
+	$( "#hora-inicio-evento" ).datetimepicker();
+});
+</script>

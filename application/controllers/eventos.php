@@ -19,7 +19,7 @@ class Eventos extends CI_Controller {
 		parent::__construct();
 		$this->load->model('eventos_model','even');
 		$this->load->model('afiliado_model','afi');
-		
+
 	}
 	private $defaultData = array(
 		'title'			=> 'Solicitudes',
@@ -45,9 +45,9 @@ class Eventos extends CI_Controller {
 		$data['contentView'] = 'eventos/index';
 		$this->_renderView($data);
 	}
-	public function seleccionar(){	
-		
-		$data = array();	
+	public function seleccionar(){
+
+		$data = array();
 		$error	= $this->session->userdata('error');
 		if ($error !== '') {
 			$data['error'] =  $error;
@@ -55,15 +55,15 @@ class Eventos extends CI_Controller {
 		}
 		else{
 			$data['error'] =  '';
-		}	
+		}
 		$this->session->set_userdata('no_empleado', '');
-		$data['eventos'] = $this->even->getAllEventos();		
+		$data['eventos'] = $this->even->getAllEventos();
 		$data['contentView'] = 'eventos/seleccionar';
 		//die(print_r($data));
 		$this->_renderView($data);
 	}
 	public function lista()
-	{			
+	{
 		$data = array();
 		//die(print($no_empleado."->"));
 		$data['eventos'] = $this->even->getAllEventosLista();
@@ -73,56 +73,56 @@ class Eventos extends CI_Controller {
 		//$this->load->view('welcome_message');
 	}
 	public function informacion($id_evento = '')
-	{			
+	{
 		$this->session->set_userdata('error','');
 		$data = array();
-		$no_empleado = $this->session->userdata('no_empleado');	
+		$no_empleado = $this->session->userdata('no_empleado');
 		if ($no_empleado === NULL || $no_empleado === '' ) {
 				$no_empleado = $this->input->post('id-empleado');
-		}	
+		}
 		if ($id_evento === '') {
 				$id_evento  = $this->input->post('id-evento');
-		}	
+		}
 		//die(print($no_empleado));
-		$afiliado = $this->afi->getAfiliado($no_empleado);	
+		$afiliado = $this->afi->getAfiliado($no_empleado);
 		if (!$afiliado) {
 			$this->session->set_userdata('error', 'No se encontro afiliado' );
 			redirect('/eventos/seleccionar');
 		}
 		$this->session->set_userdata('id_afiliado', $afiliado->id_afiliado );
 		$this->session->set_userdata('id_evento', $id_evento );
-		$data['no_empleado'] = $no_empleado;	
+		$data['no_empleado'] = $no_empleado;
 		$data['afiliado'] = $afiliado;
-		$data['evento'] = $this->even->getEventoAfiliado($id_evento,$afiliado->id_afiliado);		
+		$data['evento'] = $this->even->getEventoAfiliado($id_evento,$afiliado->id_afiliado);
 		$data['contentView'] = 'eventos/informacion';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
 	public function actualizar()
-	{			
+	{
 		$data = array();
-		$id_afiliado = $this->session->userdata('id_afiliado');			
-		$id_evento = $this->session->userdata('id_evento');		
-		$evento =  $this->even->getEventoAfiliado($id_evento, $id_afiliado);			
+		$id_afiliado = $this->session->userdata('id_afiliado');
+		$id_evento = $this->session->userdata('id_evento');
+		$evento =  $this->even->getEventoAfiliado($id_evento, $id_afiliado);
 		$nuevo         = $this->input->post($evento->nombre_variable);
-		$anterior = $evento->valor_entero;
+		$anterior = $evento->valor;
 		$valor = $anterior - $nuevo;
-		$datos       = array(    
-			'valor_entero'	=>  $valor,
+		$datos       = array(
+			'valor'	=>  $valor,
 			'fecha_actualizado' => date('Y-m-d H:i:s')
       	);
       	//die(print($id_afiliado));
 		if ($this->even->actualizarValor($datos, $id_afiliado, $id_evento)) {
 			redirect('/eventos/index');
 		}
-		
+
 		redirect('/eventos/informacion/'.$id_evento);
 	}
 	public function nuevo()
-	{			
+	{
 		$data = array();
-		$no_empleado = $this->session->userdata('no_empleado');	
-		$data['no_empleado'] = $no_empleado;			
+		$no_empleado = $this->session->userdata('no_empleado');
+		$data['no_empleado'] = $no_empleado;
 		$data['contentView'] = 'eventos/nuevo';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
@@ -136,7 +136,7 @@ class Eventos extends CI_Controller {
 		$hora_fin_evento         = $this->input->post('hora-fin-evento');
 		$fecha_inicio_evento         = $this->input->post('fecha-inicio-evento');
 		$fecha_fin_evento         = $this->input->post('fecha-fin-evento');
-		$datos       = array(    
+		$datos       = array(
 			'nombre_evento'	=>  $nombre_evento,
 			'des_evento' => $descripcion_evento,
 			'estatus' => 1,
@@ -145,7 +145,7 @@ class Eventos extends CI_Controller {
 			'hora_fin' => $hora_fin_evento,
 			'fecha_inicio' => $fecha_inicio_evento,
 			'fecha_fin' => $fecha_fin_evento,
-			'id_usuario' => 1,			
+			'id_usuario' => 1,
 			'fecha_creado' => date('Y-m-d H:i:s')
       	);
       //die(print_r($datos));
@@ -154,11 +154,11 @@ class Eventos extends CI_Controller {
 		}
 	}
 	public function editar($id_evento)
-	{			
+	{
 		$data = array();
-		$no_empleado = $this->session->userdata('no_empleado');			
-		$data['no_empleado'] = $no_empleado;		
-		$data['evento'] = $this->even->getEvento($id_evento);		
+		$no_empleado = $this->session->userdata('no_empleado');
+		$data['no_empleado'] = $no_empleado;
+		$data['evento'] = $this->even->getEvento($id_evento);
 		$data['contentView'] = 'eventos/editar';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
@@ -174,7 +174,7 @@ class Eventos extends CI_Controller {
 		$fecha_inicio_evento         = $this->input->post('fecha-inicio-evento');
 		$fecha_fin_evento         = $this->input->post('fecha-fin-evento');
 		$estatus_evento         = $this->input->post('estatus-evento');
-		$datos       = array(    
+		$datos       = array(
 			'nombre_evento'	=>  $nombre_evento,
 			'des_evento' => $descripcion_evento,
 			'estatus' => $estatus_evento,
@@ -183,7 +183,7 @@ class Eventos extends CI_Controller {
 			'hora_fin' => $hora_fin_evento,
 			'fecha_inicio' => $fecha_inicio_evento,
 			'fecha_fin' => $fecha_fin_evento,
-			'id_usuario' => 1,			
+			'id_usuario' => 1,
 			'fecha_actualizado' => date('Y-m-d H:i:s')
       	);
       //die(print_r($datos));
@@ -192,21 +192,21 @@ class Eventos extends CI_Controller {
 		}
 	}
 	public function verificaAfiliado($id_empleado)
-	{			
-		$afiliado = $this->afi->getAfiliado($id_empleado);	
+	{
+		$afiliado = $this->afi->getAfiliado($id_empleado);
 		if (!$afiliado) {
-			
-		$data = array();	
+
+		$data = array();
 		$data['contentView'] = 'eventos/noexiste';
 		die(print_r($data));
 		$this->_renderView($data);
 		}
-		
+
 		//$this->load->view('welcome_message');
 	}
-	public function invitacionindividual(){	
-		
-		$data = array();	
+	public function invitacionindividual(){
+
+		$data = array();
 		$error	= $this->session->userdata('error');
 		if ($error !== '') {
 			$data['error'] =  $error;
@@ -214,25 +214,25 @@ class Eventos extends CI_Controller {
 		}
 		else{
 			$data['error'] =  '';
-		}	
+		}
 		$this->session->set_userdata('no_empleado', '');
-		$data['eventos'] = $this->even->getAllEventos();		
+		$data['eventos'] = $this->even->getAllEventos();
 		$data['contentView'] = 'eventos/invitacionindividual';
 		//die(print_r($data));
 		$this->_renderView($data);
 	}
 	public function variables()
-	{			
-		 $data = array();	
+	{
+		 $data = array();
 		 $data['variables'] = $this->even->getAllVariables();
 		 $data['contentView'] = 'eventos/variables';
 		 $this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
 	public function nuevavariable()
-	{			
-		$data = array();			
-		$data['eventos'] = $this->even->getAllEventos();	
+	{
+		$data = array();
+		$data['eventos'] = $this->even->getAllEventos();
 		$data['contentView'] = 'eventos/nueva';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
@@ -241,12 +241,12 @@ class Eventos extends CI_Controller {
 	{
 		$id_evento                = $this->input->post('id-evento');
 		$nombre_variable          	= $this->input->post('nombre-variable');
-		$descripcion_variable      = $this->input->post('descripcion-variable');		
-		$datos       = array(    
+		$descripcion_variable      = $this->input->post('descripcion-variable');
+		$datos       = array(
 			'id_evento'	=>  $id_evento,
 			'nombre_variable' => $nombre_variable,
 			'descripcion' => $descripcion_variable ,
-			'estatus' => 1,					
+			'estatus' => 1,
 			'fecha_creado' => date('Y-m-d H:i:s')
       	);
       //die(print_r($datos));
