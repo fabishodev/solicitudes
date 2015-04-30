@@ -65,6 +65,14 @@
                   <li><a href="#">Evento 5</a></li>
                 </ul>
               </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Variables <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><?php echo anchor('eventos/variables','Variables') ?></li>                 
+                  <li class="divider"></li>
+                  <li><a href="#">Evento 5</a></li>
+                </ul>
+              </li>
             </ul>
             </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

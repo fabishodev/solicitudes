@@ -44,7 +44,7 @@
 					<input class="form-control" type="text" id="fecha-fin-evento" name="fecha-fin-evento" data-container="body" data-toggle="popover" data-placement="left" data-content="Fecha fin del evento." value="<?php echo $evento->fecha_fin ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="fecha-fin-evento" class="control-label">Fecha fin del Evento:</label><br>
+					<label for="estatus-evento" class="control-label">Estatus Evento:</label><br>
 					<select class="form-control" id="estatus-evento" name="estatus-evento">
 						<option value="1">Activo</option>
 						<option value="0">Finalizado</option>

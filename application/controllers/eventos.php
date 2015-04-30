@@ -218,6 +218,7 @@ class Eventos extends CI_Controller {
 		}
 		$this->session->set_userdata('no_empleado', '');
 		$data['eventos'] = $this->even->getAllEventos();
+		$data['variables'] = $this->even->getAllVariables();
 		$data['contentView'] = 'eventos/invitacionindividual';
 		//die(print_r($data));
 		$this->_renderView($data);
@@ -249,6 +250,33 @@ class Eventos extends CI_Controller {
       	);
       //die(print_r($datos));
 		if ($this->even->addNuevaVariable($datos)) {
+			redirect('/eventos/variables');
+		}
+	}
+	public function editarvariable($id_variable)
+	{
+		$data = array();
+		$no_empleado = $this->session->userdata('no_empleado');
+		$data['no_empleado'] = $no_empleado;
+		$data['variable'] = $this->even->getVariable($id_variable);
+		$data['contentView'] = 'eventos/editarvariable';
+		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+	public function editarvar($id_variable )
+	{
+		//$id_evento          	= $this->input->post('id-evento');
+		$nombre_variable          	= $this->input->post('nombre-variable');
+		$descripcion_variable     = $this->input->post('descripcion-variable');		
+		$estatus_variable         = $this->input->post('estatus-variable');
+		$datos       = array(
+			'nombre_variable'	=>  $nombre_variable,
+			'descripcion' => $descripcion_variable,
+			'estatus' => $estatus_variable,		
+			'fecha_actualizado' => date('Y-m-d H:i:s')
+      	);
+      //die(print_r($datos));
+		if ($this->even->editarVariable($datos,$id_variable)) {
 			redirect('/eventos/variables');
 		}
 	}

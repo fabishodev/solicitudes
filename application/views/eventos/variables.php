@@ -53,10 +53,10 @@
 		                    </td>
 		                     <td>
 		                     <?php if ( $fila->estatus == 1){ ?>
-		                       <span class="label label-success"> Activo </span>
+		                       <span class="label label-success"> Activa </span>
 		                   		<?php }elseif ($fila->estatus == 0) { ?>                   		
 		                   	
-		                      <span class="label label-danger"> Finalizado</span>
+		                      <span class="label label-danger"> No Activa</span>
 		                     <?php }?>
 		                    </td>		                 
 		                    <td>

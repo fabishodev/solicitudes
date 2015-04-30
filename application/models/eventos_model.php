@@ -84,7 +84,7 @@ class eventos_model extends CI_Model {
 		}
 	}
 	function getAllVariables() {
-		$where = "estatus = 1";
+		$where = "";
 		$this->db->select('*');
 		if($where != NULL){
 			$this->db->where($where,NULL,FALSE);
@@ -102,6 +102,28 @@ class eventos_model extends CI_Model {
 		} else {
 		$this->db->trans_commit();
 		return TRUE;
+		}
+	}
+	function getVariable($id_variable) {
+		$where = "id = ".$id_variable."";
+		$this->db->select('*');
+		if($where != NULL){
+				$this->db->where($where,NULL,FALSE);
+			}
+		$query = $this->db->get('tram_eventos_variables');
+		return $query->row();
+	}
+	function editarVariable($serv = array(),$id_evento) {
+		//die(print_r($serv));
+			$this->db->trans_begin();
+		$this->db->where('id', $id_evento);
+		$this->db->update('tram_eventos_variables', $serv);
+			if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+			return FALSE;
+		} else {
+			$this->db->trans_commit();
+			return TRUE;
 		}
 	}
 	
