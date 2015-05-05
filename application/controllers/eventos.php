@@ -280,6 +280,14 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/variables');
 		}
 	}
+	public function cumplaneros($mes = ''){
+		 $data = array();
+		 $data['cumplaneros'] = $this->even->getAllCumplaneros($mes);
+		 $data['contentView'] = 'eventos/cumplaneros';
+		 $this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+
 
 }
 /* End of file eventos.php */
