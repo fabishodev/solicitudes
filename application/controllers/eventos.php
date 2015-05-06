@@ -19,6 +19,7 @@ class Eventos extends CI_Controller {
 		parent::__construct();
 		$this->load->model('eventos_model','even');
 		$this->load->model('afiliado_model','afi');
+		$this->load->library('felicitar');
 
 	}
 	private $defaultData = array(
@@ -280,12 +281,33 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/variables');
 		}
 	}
-	public function cumplaneros($mes = ''){
+	public function cumpleaneros($mes = ''){
 		 $data = array();
-		 $data['cumplaneros'] = $this->even->getAllCumplaneros($mes);
-		 $data['contentView'] = 'eventos/cumplaneros';
+		  $data['cumpleaneros'] = FALSE;
+		  
+		 if ($mes !== '') {
+		 	 $data['cumpleaneros'] = $this->afi->getCumpleanerosMes($mes);
+		 	 //die(print_r($data));
+		 }		
+		 if ($mes == '00') {
+		  	$data['cumpleaneros'] = $this->afi->getCumpleanerosHoy();
+		  }
+		 $data['contentView'] = 'eventos/cumpleaneros';
 		 $this->_renderView($data);
 		//$this->load->view('welcome_message');
+	}
+	public function felicitar($id_empleado){
+			$afiliado = $this->afi->getAfiliado($id_empleado);
+			$nombre = $afiliado->nombre;
+			$apellido_paterno = $afiliado->primer_apellido;
+			$apellido_materno = $afiliado->segundo_apellido;
+			$nombre_completo =	$nombre." ".$apellido_paterno." ".$apellido_materno;
+			$email = $afiliado->correo_electronico;
+			$this->felicitar->EnviarCorreoFelicitacion($email, $nombre_completo);//envía el correo electrónico
+			 $data = array();
+			  $data['cumpleaneros'] = FALSE;
+			 $data['contentView'] = 'eventos/cumpleaneros';
+		 	$this->_renderView($data);
 	}
 
 

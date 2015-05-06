@@ -10,11 +10,13 @@
     <link href="css/styles.css" rel="stylesheet" type="text/css">-->
     <!-- styles -->
     <?php echo link_tag( 'css/lib/bootstrap.min.css');?>
+    <?php echo link_tag( 'css/lib/jquery.dataTables.min.css');?>
     <?php //echo link_tag( 'css/main.css'); ?>
     <?php // echo link_tag( 'css/styles.css');?>
     <!-- scripts -->
     <script src="<?php echo base_url();?>js/lib/jquery-1.11.2.min.js"></script>
     <script src="<?php echo base_url();?>js/lib/bootstrap.min.js"></script>
+     <script src="<?php echo base_url();?>js/lib/jquery.dataTables.min.js"></script>
     <?php if (isset($scripts)): foreach ($scripts as $js):?>
     <script src="<?php echo base_url()."js/{$js}.js";?>" type="text/javascript"></script>
     <?php endforeach; endif;?>
