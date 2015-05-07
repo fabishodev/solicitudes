@@ -16,7 +16,9 @@
 					<div class="jumbotron">
 						<h1>   <?php echo  $fila->nombre_evento ?></h1>
 						<p><?php echo  $fila->des_evento ?></p>
+						<?php if ($this->session->userdata('id_tipo_usuario')==3){ ?>
 						<p><?php echo anchor('eventos/informacion/'.$fila->id,'Ir',array('class' => 'btn btn-primary')) ?></p>
+						<?php } ?>
 					</div>
 					<?php
 					}

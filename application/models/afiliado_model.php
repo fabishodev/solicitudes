@@ -15,7 +15,7 @@ function getAfiliado($id_empleado) {
 function getCumpleanerosMes($mes) {		
 		$where = "MONTH(fecha_nacimiento) = ".$mes."";
 		$this->db->select('*');
-		$this->db->from('vw_afiliados');
+		$this->db->from('vw_afiliados_felicitados');
 		if ($where != NULL) {
 			$this->db->where($where, NULL, FALSE);
 		}
@@ -32,7 +32,7 @@ function getCumpleanerosMes($mes) {
 		$month = date('m');
 		$where = "MONTH(fecha_nacimiento)= ".$month." AND DAY(fecha_nacimiento) = ".$day."";
 		$this->db->select('*');
-		$this->db->from('vw_afiliados');
+		$this->db->from('vw_afiliados_felicitados');
 		if ($where != NULL) {
 			$this->db->where($where, NULL, FALSE);
 		}

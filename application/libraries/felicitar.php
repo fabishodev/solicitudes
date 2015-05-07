@@ -29,7 +29,7 @@ class Felicitar {
                 $message->setSubject('Muchas felicidades');
                 //no_reply@ugto.mx
                 $message->setFrom(array('siaspaaug@gmail.com' => 'SISASPAAUG '));
-                $message->addTo('froylangar@gmail.com');
+                $message->addTo('fabishodev@gmail.com');
                 //$message->addTo('mgsnikips@gmail.com');
 
                 //$message->addBcc('fabishodev@gmail.com');
@@ -74,10 +74,10 @@ class Felicitar {
 
                 //Add alternative parts with addPart()
                 $message->addPart("<h2>Felicidades </h2>".$nombre."
-                <h3>Prueba de felicitación via correo electrónico:</h3>
+                <h3>Prueba de felicitación via correo electrónico con carta de felicitación</h3>
                 ---<br>
                 <h4>Sinceramente ASPAAUG.</h4>", 'text/html');
-                $message->attach(Swift_Attachment::fromPath('my-document.pdf'));
+                $message->attach(Swift_Attachment::fromPath('files/cartas/example.pdf'));
                 $result = $mailer->send($message);
     }
 }

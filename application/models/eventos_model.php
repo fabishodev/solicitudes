@@ -126,5 +126,26 @@ class eventos_model extends CI_Model {
 			return TRUE;
 		}
 	}
+	function getAllFelicitados() {
+		$where = "";
+		$this->db->select('*');
+		if($where != NULL){
+			$this->db->where($where,NULL,FALSE);
+			$this->db->order_by('fecha_creado', 'desc');
+			}
+		$query = $this->db->get('tram_felicitaciones');
+		return $query->result();
+	}
+	function addNuevaFelicitacion($serv = array()){
+		$this->db->trans_begin();
+		$this->db->insert('tram_felicitaciones', $serv);
+		if ($this->db->trans_status() === FALSE) {
+		$this->db->trans_rollback();
+		return FALSE;
+		} else {
+		$this->db->trans_commit();
+		return TRUE;
+		}
+	}
 	
 }
