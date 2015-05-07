@@ -4,8 +4,7 @@ require_once APPPATH.'libraries/swift_mailer/lib/swift_required.php';
 
 class Felicitar {
 
-  public function EnviarCorreoFelicitacion($email, $nombre)
-   {
+  public function EnviarCorreoFelicitacion($email, $nombre){
     //echo "Enviando Correos";
     //ini_set('max_execution_time', 28800); //240 segundos = 4 minutos
      //Enviar correo electr�nico
@@ -30,7 +29,7 @@ class Felicitar {
                 $message->setSubject('Muchas felicidades');
                 //no_reply@ugto.mx
                 $message->setFrom(array('siaspaaug@gmail.com' => 'SISASPAAUG '));
-                $message->addTo('fabishodev@gmail.com');
+                $message->addTo('froylangar@gmail.com');
                 //$message->addTo('mgsnikips@gmail.com');
 
                 //$message->addBcc('fabishodev@gmail.com');
@@ -43,8 +42,7 @@ class Felicitar {
                 $result = $mailer->send($message);
     }
 
-     public function EnviarCorreoCartaFelicitacion($email, $nombre, $path)
-   {
+     public function EnviarCorreoCartaFelicitacion($email, $nombre, $path){
     //echo "Enviando Correos";
     //ini_set('max_execution_time', 28800); //240 segundos = 4 minutos
      //Enviar correo electr�nico
