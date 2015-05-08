@@ -20,6 +20,7 @@ class Eventos extends CI_Controller {
 		$this->load->model('eventos_model','even');
 		$this->load->model('afiliado_model','afi');
 		$this->load->library('felicitar');
+		$this->load->library('pdf');
 	}
 	private $defaultData = array(
 					'title'			=> 'Solicitudes',
@@ -316,11 +317,29 @@ class Eventos extends CI_Controller {
 				$data = array();
 			$data['cumpleaneros'] = FALSE;
 			$data['contentView'] = 'eventos/cumpleaneros';
-			$this->_renderView($data);
-			
+			$this->_renderView($data);		
 			
 	}
-	
+	public function generarcarta($id_empleado){
+			$afiliado = $this->afi->getAfiliado($id_empleado);
+			$nombre = $afiliado->nombre;
+			$apellido_paterno = $afiliado->primer_apellido;
+			$apellido_materno = $afiliado->segundo_apellido;
+			$nombre_completo =	$nombre." ".$apellido_paterno." ".$apellido_materno;
+			$email = $afiliado->correo_electronico;
+			$this->pdf->GenerarCartaFelicitacion($nombre_completo,$id_empleado);		
+	}
+	public function felicitados()
+	{
+		$anio                = $this->input->post('anio');
+		$data = array();		
+		$data['anios'] = $this->afi->getAniosFelicitacion();
+		$data['felicitados'] = $this->afi->getFelicitadosAnio($anio);
+		$data['contentView'] = 'eventos/felicitados';
+		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+
 }
 /* End of file eventos.php */
 /* Location: ./application/controllers/eventos.php */

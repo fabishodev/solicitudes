@@ -66,7 +66,7 @@
 							<?php if ($fila->correo_electronico !== NULL): ?>
 							<?php echo anchor('eventos/felicitar/'.$fila->id_empleado,'Felicitar',array('class' => 'btn btn-info btn-xs')) ?>
 							<?php endif ?>
-							<?php echo anchor('eventos/imprimircarta/'.$fila->id_empleado,'Imprimir Carta',array('class' => 'btn btn-primary btn-xs')) ?>
+							<?php echo anchor('eventos/generarcarta/'.$fila->id_empleado,'Imprimir Carta',array('class' => 'btn btn-primary btn-xs','target' => '_blank')) ?>
 						</td>
 					</tr>
 					<?php

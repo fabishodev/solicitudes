@@ -2,7 +2,7 @@
 }
 class afiliado_model extends CI_Model {
 
-function getAfiliado($id_empleado) {
+	function getAfiliado($id_empleado) {
 		$where = "id_empleado = ".$id_empleado."";
 		$this->db->select('*');
 		$this->db->from('vw_afiliados');
@@ -12,7 +12,7 @@ function getAfiliado($id_empleado) {
 		$query = $this->db->get();
 		return $query->row();
 	}
-function getCumpleanerosMes($mes) {		
+	function getCumpleanerosMes($mes) {		
 		$where = "MONTH(fecha_nacimiento) = ".$mes."";
 		$this->db->select('*');
 		$this->db->from('vw_afiliados_felicitados');
@@ -41,4 +41,29 @@ function getCumpleanerosMes($mes) {
 
 		return $query->result();
 	}
+
+	function getFelicitadosAnio($anio) {				
+		$where = "anio_felicitacion ='".$anio."'";
+		$this->db->select('*');
+		$this->db->from('vw_felicitados');
+		if ($where != NULL) {
+			$this->db->where($where, NULL, FALSE);
+		}
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function getAniosFelicitacion() {				
+		$where = "";
+		$this->db->select('anio_felicitacion');
+		$this->db->distinct();
+		$this->db->from('vw_felicitados');
+		$this->db->order_by('anio_felicitacion', 'desc');
+		if ($where != NULL) {
+			$this->db->where($where, NULL, FALSE);
+		}
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 }
