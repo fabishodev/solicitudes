@@ -26,7 +26,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<form id="form-seleccionar" method="post" action="<?php echo base_url();?>index.php/eventos/agregarinvitacionindividual">
+			<form id="form-seleccionar" method="post" action="<?php echo base_url();?>index.php/felicitacion/agregarinvitacionindividual">
 				<div class="form-group">
 					<label for="id-entero" class="control-label">Evento</label><br>
 					<select class="form-control" id="id-evento" name="id-evento" required>

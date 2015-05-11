@@ -66,4 +66,19 @@ class afiliado_model extends CI_Model {
 		return $query->result();
 	}
 
+	function getCumpleanerosFecha($fecha) {		
+		$day = date('d', strtotime($fecha));
+		$month = date('m', strtotime($fecha));		
+		$where = "MONTH(fecha_nacimiento)= ".$month." AND DAY(fecha_nacimiento) = ".$day."";
+		$this->db->select('*');
+		$this->db->from('vw_afiliados_felicitados');
+		if ($where != NULL) {
+			$this->db->where($where, NULL, FALSE);
+		}
+
+		$query = $this->db->get();
+		return $query->result();
+
+	}
+
 }

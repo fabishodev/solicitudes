@@ -89,7 +89,7 @@ class Pdf extends TCPDF
 		$pdf->Output('C://xampp/htdocs/solicitudes/files/cartas/'.$nombre_archivo.'', 'F');
 		$pdf->Output($nombre_archivo, 'I');
 		
-
+		return $nombre_archivo;
 
 
 	}

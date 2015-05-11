@@ -1,3 +1,6 @@
+ <?php  echo link_tag( 'css/lib/jquery.timepicker.css');?>
+    <!-- scripts -->
+    <script src="<?php echo base_url();?>js/lib/jquery.timepicker.min.js"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -59,3 +62,9 @@
 		</div>
 	</div>
 </div>
+<script>
+$(document).ready(function () {
+	$('#hora-inicio-evento').timepicker({ 'timeFormat': 'H:i:s' });
+	$('#hora-fin-evento').timepicker({ 'timeFormat': 'H:i:s' });
+	});
+</script>

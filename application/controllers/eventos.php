@@ -21,13 +21,14 @@ class Eventos extends CI_Controller {
 		$this->load->model('afiliado_model','afi');
 		$this->load->library('felicitar');
 		$this->load->library('pdf');
+		$this->session->set_userdata('id_tipo_usuario', 3 );
 	}
 	private $defaultData = array(
-					'title'			=> 'Solicitudes',
-				'layout' 		=> 'layout/lytDefault',
+			'title'			=> 'Solicitudes',
+			'layout' 		=> 'layout/lytDefault',
 			'contentView' 	=> 'vUndefined',
-				'stylecss'		=> '',
-				'scripts'		=>  array('eventos'),
+			'stylecss'		=> '',
+			'scripts'		=>  array('eventos'),
 	);
 	private function _renderView($data = array())
 	{
@@ -46,6 +47,7 @@ class Eventos extends CI_Controller {
 			$data['contentView'] = 'eventos/index';
 			$this->_renderView($data);		
 	}
+
 	public function seleccionar(){
 		if ($this->session->userdata('id_tipo_usuario')!=3){
 			redirect('/eventos/index');
@@ -131,13 +133,13 @@ class Eventos extends CI_Controller {
 	}
 	public function nuevoevento()
 	{
-			$nombre_evento          	= $this->input->post('nombre-evento');
-		$descripcion_evento      = $this->input->post('descripcion-evento');
-			$lugar_evento         	 = $this->input->post('lugar-evento');
-		$hora_inicio_evento         = $this->input->post('hora-inicio-evento');
-		$hora_fin_evento         = $this->input->post('hora-fin-evento');
-		$fecha_inicio_evento         = $this->input->post('fecha-inicio-evento');
-		$fecha_fin_evento         = $this->input->post('fecha-fin-evento');
+		$nombre_evento		   	= $this->input->post('nombre-evento');
+		$descripcion_evento     = $this->input->post('descripcion-evento');
+		$lugar_evento       	= $this->input->post('lugar-evento');
+		$hora_inicio_evento     = $this->input->post('hora-inicio-evento');
+		$hora_fin_evento        = $this->input->post('hora-fin-evento');
+		$fecha_inicio_evento    = $this->input->post('fecha-inicio-evento');
+		$fecha_fin_evento       = $this->input->post('fecha-fin-evento');
 		$datos       = array(
 				'nombre_evento'	=>  $nombre_evento,
 			'des_evento' => $descripcion_evento,
@@ -149,7 +151,7 @@ class Eventos extends CI_Controller {
 			'fecha_fin' => $fecha_fin_evento,
 			'id_usuario' => 1,
 			'fecha_creado' => date('Y-m-d H:i:s')
-	);
+		);
 //die(print_r($datos));
 		if ($this->even->addNuevoEvento($datos)) {
 			redirect('/eventos/index');
@@ -278,66 +280,11 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/variables');
 		}
 	}
-	public function cumpleaneros($mes = ''){
-		$data = array();
-		$data['cumpleaneros'] = FALSE;
-		
-		if ($mes !== '') {
-			$data['cumpleaneros'] = $this->afi->getCumpleanerosMes($mes);
-			//die(print_r($data));
-				}		else{
-			$data['cumpleaneros'] = $this->afi->getCumpleanerosHoy();
-		}
-		if ($mes == '00') {
-			$data['cumpleaneros'] = $this->afi->getCumpleanerosHoy();
-		}
-		$data['contentView'] = 'eventos/cumpleaneros';
-		$this->_renderView($data);
-		//$this->load->view('welcome_message');
-	}
-	public function felicitar($id_empleado){
-			$afiliado = $this->afi->getAfiliado($id_empleado);
-			$nombre = $afiliado->nombre;
-			$apellido_paterno = $afiliado->primer_apellido;
-			$apellido_materno = $afiliado->segundo_apellido;
-				$nombre_completo =	$nombre." ".$apellido_paterno." ".$apellido_materno;
-						$email = $afiliado->correo_electronico;
-			$this->felicitar->EnviarCorreoCartaFelicitacion($email, $nombre_completo, '');//envía el correo electrónico
-			$datos = array(
-				'id_empleado' => $id_empleado,
-				'felicitado' => 1,
-				'anio_felicitacion' => date('Y'),
-				'fecha_felicitado' => date('Y-m-d H:i:s'),
-				'fecha_creado' => date('Y-m-d H:i:s')
-				);
-			
-			if ($this->even->addNuevaFelicitacion($datos)) {
-				redirect('/eventos/cumpleaneros');
-			}
-				$data = array();
-			$data['cumpleaneros'] = FALSE;
-			$data['contentView'] = 'eventos/cumpleaneros';
-			$this->_renderView($data);		
-			
-	}
-	public function generarcarta($id_empleado){
-			$afiliado = $this->afi->getAfiliado($id_empleado);
-			$nombre = $afiliado->nombre;
-			$apellido_paterno = $afiliado->primer_apellido;
-			$apellido_materno = $afiliado->segundo_apellido;
-			$nombre_completo =	$nombre." ".$apellido_paterno." ".$apellido_materno;
-			$email = $afiliado->correo_electronico;
-			$this->pdf->GenerarCartaFelicitacion($nombre_completo,$id_empleado);		
-	}
-	public function felicitados()
-	{
-		$anio                = $this->input->post('anio');
-		$data = array();		
-		$data['anios'] = $this->afi->getAniosFelicitacion();
-		$data['felicitados'] = $this->afi->getFelicitadosAnio($anio);
-		$data['contentView'] = 'eventos/felicitados';
-		$this->_renderView($data);
-		//$this->load->view('welcome_message');
+	
+
+	public function fecha(){
+		$fecha  = $this->input->post('fecha');
+		die(print($fecha));
 	}
 
 }

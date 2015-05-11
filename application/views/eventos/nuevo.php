@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<?php  echo link_tag( 'css/lib/jquery.timepicker.css');?>
+<script src="<?php echo base_url();?>js/lib/jquery.timepicker.min.js"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -53,6 +55,7 @@
 $(function() {
 	$( "#fecha-inicio-evento" ).datepicker();
 	$( "#fecha-fin-evento" ).datepicker();
-	$( "#hora-inicio-evento" ).datetimepicker();
+	$('#hora-inicio-evento').timepicker({ 'timeFormat': 'H:i:s' });
+	$('#hora-fin-evento').timepicker({ 'timeFormat': 'H:i:s' });
 });
 </script>

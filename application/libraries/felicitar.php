@@ -42,7 +42,7 @@ class Felicitar {
                 $result = $mailer->send($message);
     }
 
-     public function EnviarCorreoCartaFelicitacion($email, $nombre, $path){
+     public function EnviarCorreoCartaFelicitacion($email, $nombre, $nombre_archivo){
     //echo "Enviando Correos";
     //ini_set('max_execution_time', 28800); //240 segundos = 4 minutos
      //Enviar correo electr�nico
@@ -77,7 +77,7 @@ class Felicitar {
                 <h3>Prueba de felicitación via correo electrónico con carta de felicitación</h3>
                 ---<br>
                 <h4>Sinceramente ASPAAUG.</h4>", 'text/html');
-                $message->attach(Swift_Attachment::fromPath('files/cartas/example.pdf'));
+                $message->attach(Swift_Attachment::fromPath('files/cartas/'.$nombre_archivo.''));
                 $result = $mailer->send($message);
     }
 }

@@ -14,6 +14,7 @@
 		</div>
 	</div>
 </div>
+<br>
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
@@ -24,7 +25,7 @@
 						<th>Nombre Evento</th>
 						<th>Descripcion</th>
 						<th>Variable</th>
-						<th>Descripcion</th>
+						<th>Descripción</th>
 						<th>Estatus</th>				
 						<th>Fecha Creado</th>						
 						<th>Opciones</th>
@@ -78,7 +79,7 @@
 						<th>Nombre Evento</th>
 						<th>Descripcion</th>
 						<th>Variable</th>
-						<th>Descripcion</th>
+						<th>Descripción</th>
 						<th>Estatus</th>				
 						<th>Fecha Creado</th>						
 						<th>Opciones</th>
