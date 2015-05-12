@@ -11,9 +11,19 @@ class eventos_model extends CI_Model {
 		$this->db->select('*');
 		if($where != NULL){
 			$this->db->where($where,NULL,FALSE);
-			$this->db->order_by('fecha_creado', 'desc');
+			$this->db->order_by('fecha_inicio', 'desc');
 			}
-		$query = $this->db->get('tram_eventos');
+		$query = $this->db->get('vw_evento_afiliado');
+		return $query->result();
+	}
+	function getAllEventosAfiliado($id_afiliado) {
+		$where = "id_afiliado = ".$id_afiliado."";
+		$this->db->select('*');
+		if($where != NULL){
+			$this->db->where($where,NULL,FALSE);
+			$this->db->order_by('fecha_inicio', 'asc');
+			}
+		$query = $this->db->get('vw_evento_afiliado');
 		return $query->result();
 	}
 	function getAllEventosLista() {
@@ -35,8 +45,8 @@ class eventos_model extends CI_Model {
 		$query = $this->db->get('tram_eventos');
 		return $query->row();
 	}
-	function getEventoAfiliado($id_evento, $id_afiliado) {
-		$where = "id = ".$id_evento." AND id_afiliado =".$id_afiliado."";
+	function getEventoAfiliado($id_variable, $id_afiliado) {
+		$where = "id_variable = ".$id_variable." AND id_afiliado =".$id_afiliado."";
 		$this->db->select('*');
 		if($where != NULL){
 							$this->db->where($where,NULL,FALSE);
@@ -44,11 +54,11 @@ class eventos_model extends CI_Model {
 		$query = $this->db->get('vw_evento_afiliado');
 		return $query->row();
 	}
-	function actualizarValor($serv = array(), $id_afiliado, $id_evento) {
+	function actualizarValor($serv = array(), $id_afiliado, $id_variable) {
 		//die(print_r($serv));
 		$this->db->trans_begin();
 		$this->db->where('id_afiliado', $id_afiliado);
-		$this->db->where('id_evento', $id_evento);
+		$this->db->where('id_variable', $id_variable);
 		$this->db->update('tram_eventos_afiliados', $serv);
 			if ($this->db->trans_status() === FALSE) {
 			$this->db->trans_rollback();

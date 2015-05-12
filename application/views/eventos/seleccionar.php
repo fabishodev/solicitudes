@@ -28,9 +28,9 @@
 		<div class="col-lg-12">
 			<form id="form-seleccionar" method="post" action="<?php echo base_url();?>index.php/eventos/informacion/">
 				<div class="form-group">
-					<select class="form-control" id="id-evento" name="id-evento" required>
+					<select class="form-control" id="id-variable" name="id-variable" required>
 						<?php foreach ($eventos as $e) {	?>
-						<option value="<?php echo $e->id;?>"><?php echo $e->nombre_evento;?></option>
+						<option value="<?php echo $e->id_variable;?>"><?php echo $e->nombre_evento ." - ". $e->descripcion;?></option>
 						<?php } ?>
 					</select>
 				</div>

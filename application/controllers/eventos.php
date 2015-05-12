@@ -21,7 +21,7 @@ class Eventos extends CI_Controller {
 		$this->load->model('afiliado_model','afi');
 		$this->load->library('felicitar');
 		$this->load->library('pdf');
-		$this->session->set_userdata('id_tipo_usuario', 3 );
+		$this->session->set_userdata('id_tipo_usuario', 1);
 	}
 	private $defaultData = array(
 			'title'			=> 'Solicitudes',
@@ -41,15 +41,19 @@ class Eventos extends CI_Controller {
 			}
 			$this->session->set_userdata('no_empleado', $no_empleado );
 			$data = array();
-			//die(print($no_empleado."->"));
-			$data['eventos'] = $this->even->getAllEventos();
+			if ($no_empleado) {
+				$afiliado = $this->afi->getAfiliado($no_empleado);
+					$data['eventos'] = $this->even->getAllEventosAfiliado($afiliado->id_afiliado);
+			}else{
+				$data['eventos'] = $this->even->getAllEventos();
+			}					
+		
 			$data['no_empleado'] = $no_empleado;
 			$data['contentView'] = 'eventos/index';
 			$this->_renderView($data);		
 	}
-
 	public function seleccionar(){
-		if ($this->session->userdata('id_tipo_usuario')!=3){
+		if ($this->session->userdata('id_tipo_usuario')!==3){
 			redirect('/eventos/index');
 		}
 		$data = array();
@@ -77,7 +81,7 @@ class Eventos extends CI_Controller {
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
 	}
-	public function informacion($id_evento = '')
+	public function informacion($id_variable = '')
 	{
 		$this->session->set_userdata('error','');
 		$data = array();
@@ -85,8 +89,8 @@ class Eventos extends CI_Controller {
 		if ($no_empleado === NULL || $no_empleado === '' ) {
 				$no_empleado = $this->input->post('id-empleado');
 		}
-		if ($id_evento === '') {
-				$id_evento  = $this->input->post('id-evento');
+		if ($id_variable === '') {
+				$id_variable  = $this->input->post('id-variable');
 		}
 		//die(print($no_empleado));
 		$afiliado = $this->afi->getAfiliado($no_empleado);
@@ -95,10 +99,10 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/seleccionar');
 		}
 		$this->session->set_userdata('id_afiliado', $afiliado->id_afiliado );
-		$this->session->set_userdata('id_evento', $id_evento );
+		$this->session->set_userdata('id_variable', $id_variable );
 		$data['no_empleado'] = $no_empleado;
 		$data['afiliado'] = $afiliado;
-		$data['evento'] = $this->even->getEventoAfiliado($id_evento,$afiliado->id_afiliado);
+		$data['evento'] = $this->even->getEventoAfiliado($id_variable,$afiliado->id_afiliado);
 		$data['contentView'] = 'eventos/informacion';
 		$this->_renderView($data);
 		//$this->load->view('welcome_message');
@@ -107,8 +111,8 @@ class Eventos extends CI_Controller {
 	{
 		$data = array();
 		$id_afiliado = $this->session->userdata('id_afiliado');
-		$id_evento = $this->session->userdata('id_evento');
-		$evento =  $this->even->getEventoAfiliado($id_evento, $id_afiliado);
+		$id_variable = $this->session->userdata('id_variable');
+		$evento =  $this->even->getEventoAfiliado($id_variable, $id_afiliado);
 		$nuevo         = $this->input->post($evento->nombre_variable);
 		$anterior = $evento->valor;
 		$valor = $anterior - $nuevo;
@@ -117,7 +121,7 @@ class Eventos extends CI_Controller {
 			'fecha_actualizado' => date('Y-m-d H:i:s')
 	);
 	//die(print($id_afiliado));
-		if ($this->even->actualizarValor($datos, $id_afiliado, $id_evento)) {
+		if ($this->even->actualizarValor($datos, $id_afiliado, $id_variable)) {
 			redirect('/eventos/index');
 		}
 		redirect('/eventos/informacion/'.$id_evento);

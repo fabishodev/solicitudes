@@ -12,7 +12,7 @@
     <?php echo link_tag( 'css/lib/bootstrap.min.css');?>
     <?php echo link_tag( 'css/lib/jquery.dataTables.min.css');?>
     <?php //echo link_tag( 'css/main.css'); ?>
-    <?php // echo link_tag( 'css/styles.css');?>
+    <?php echo link_tag( 'css/styles.css');?>
     <!-- scripts -->
     <script src="<?php echo base_url();?>js/lib/jquery-1.11.2.min.js"></script>
     <script src="<?php echo base_url();?>js/lib/bootstrap.min.js"></script>
