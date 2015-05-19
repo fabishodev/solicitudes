@@ -21,7 +21,7 @@ class Eventos extends CI_Controller {
 		$this->load->model('afiliado_model','afi');
 		$this->load->library('felicitar');
 		$this->load->library('pdf');
-		$this->session->set_userdata('id_tipo_usuario', 1);
+		$this->session->set_userdata('id_tipo_usuario', 3);
 	}
 	private $defaultData = array(
 			'title'			=> 'Solicitudes',
@@ -35,7 +35,7 @@ class Eventos extends CI_Controller {
 		$data = array_merge($this->defaultData, $data);
 		$this->load->view($data['layout'], $data);
 	}
-	public function index($no_empleado = ''){		
+	public function index($no_empleado = ''){
 			if ($no_empleado === '' && $this->session->userdata('id_tipo_usuario')==3) {
 				redirect('/eventos/seleccionar');
 			}
@@ -46,11 +46,11 @@ class Eventos extends CI_Controller {
 					$data['eventos'] = $this->even->getAllEventosAfiliado($afiliado->id_afiliado);
 			}else{
 				$data['eventos'] = $this->even->getAllEventos();
-			}					
-		
+			}
+
 			$data['no_empleado'] = $no_empleado;
 			$data['contentView'] = 'eventos/index';
-			$this->_renderView($data);		
+			$this->_renderView($data);
 	}
 	public function seleccionar(){
 		if ($this->session->userdata('id_tipo_usuario')!==3){
@@ -284,7 +284,7 @@ class Eventos extends CI_Controller {
 			redirect('/eventos/variables');
 		}
 	}
-	
+
 
 	public function fecha(){
 		$fecha  = $this->input->post('fecha');

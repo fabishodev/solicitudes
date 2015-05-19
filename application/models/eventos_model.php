@@ -5,7 +5,7 @@ class eventos_model extends CI_Model {
 		parent::__construct();
 		$this->db = $this->load->database('default', TRUE);
 		}
-		
+
 	function getAllEventos() {
 		$where = "estatus = 1";
 		$this->db->select('*');
@@ -79,7 +79,7 @@ class eventos_model extends CI_Model {
 		return TRUE;
 	}
 }
-	
+
 	function editarEvento($serv = array(),$id_evento) {
 		//die(print_r($serv));
 			$this->db->trans_begin();
@@ -157,5 +157,5 @@ class eventos_model extends CI_Model {
 		return TRUE;
 		}
 	}
-	
+
 }
