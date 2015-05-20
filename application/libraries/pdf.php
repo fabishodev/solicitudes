@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
+
 require_once dirname(__FILE__) . '/tcpdf/tcpdf.php';
- 
+
 class Pdf extends TCPDF
 {
     function __construct()
@@ -9,7 +9,7 @@ class Pdf extends TCPDF
         parent::__construct();
     }
 
-    public function GenerarCartaFelicitacion($nombre,$id_empleado) {		
+    public function GenerarCartaFelicitacion($nombre,$id_empleado) {
 
 		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
@@ -57,23 +57,23 @@ class Pdf extends TCPDF
 		//fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
 
-		// Establecemos el contenido para imprimir	
-	
+		// Establecemos el contenido para imprimir
+
 
 		//preparamos y maquetamos el contenido a crear
 		$html = '';
 
-		$html .= "<h2>Maria del Carmen Cano Canchola</h2>";
-		$html .= "<h3>Secretaria General</h3>";
-		$html .= "<h3>Comite Ejecutivo</h3>";
+		$html .= "<p>Maria del Carmen Cano Canchola</p>";
+		$html .= "<p>Secretaria General</p>";
+		$html .= "<p>Comite Ejecutivo</p>";
 		$html .= "</br>";
 		$html .= "</br>";
 		$html .= "</br>";
 		$html .= "</br>";
 		$html .= "<p>" . $nombre . "</p>";
 
-		
-		
+
+
 
 		//die(print_r($html));
 
@@ -86,9 +86,10 @@ class Pdf extends TCPDF
 		$anio_felicitacion = date('Y');
 		$nombre_archivo = utf8_decode("carta_felicitacion_".$id_empleado."_".$anio_felicitacion.".pdf");
 
-		$pdf->Output('C://xampp/htdocs/solicitudes/files/cartas/'.$nombre_archivo.'', 'F');
+		//$pdf->Output('C://xampp/htdocs/solicitudes/files/cartas/'.$nombre_archivo.'', 'F');
+    //$pdf->Output('files/cartas/'.$nombre_archivo.'', 'F');
 		$pdf->Output($nombre_archivo, 'I');
-		
+
 		return $nombre_archivo;
 
 
