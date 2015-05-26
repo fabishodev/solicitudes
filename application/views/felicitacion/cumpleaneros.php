@@ -100,6 +100,7 @@
 							<?php echo anchor('felicitacion/felicitar/'.$fila->id_empleado,'Felicitar',array('class' => 'btn btn-info btn-xs','target' => '_blank')) ?>
 							<?php endif ?>
 							<?php echo anchor('felicitacion/generarcarta/'.$fila->id_empleado,'Generar Carta',array('class' => 'btn btn-primary btn-xs','target' => '_blank')) ?>
+							<?php echo anchor('felicitacion/imprimirreporte/','Impimir Reporte',array('class' => 'btn btn-info btn-xs','target' => '_blank')) ?>
 						</td>
 					</tr>
 					<?php

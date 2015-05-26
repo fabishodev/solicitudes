@@ -92,6 +92,7 @@ class Felicitacion extends CI_Controller {
 		$nombre_completo =	$nombre." ".$apellido_paterno." ".$apellido_materno;
 		$email = $afiliado->correo_electronico;
 		$nombre_archivo = $this->pdf->GenerarCartaFelicitacion($nombre_completo,$id_empleado);
+       
 		$datos = array(
 				'id_empleado' => $id_empleado,
 				'felicitado' => 1,
@@ -113,6 +114,11 @@ class Felicitacion extends CI_Controller {
 		$data['felicitados'] = $this->afi->getFelicitadosAnio($anio);
 		$data['contentView'] = 'felicitacion/felicitados';
 		$this->_renderView($data);
+		//$this->load->view('welcome_message');
+	}
+    public function imprimirreporte()
+	{
+		 $this->pdf->ImprimeInformeFinal();
 		//$this->load->view('welcome_message');
 	}
 }
